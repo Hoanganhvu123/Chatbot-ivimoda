@@ -1,0 +1,494 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- saved from url=(0032)https://www.cs.cmu.edu/~./enron/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+    <title>Enron Email Dataset</title>
+  <style type="text/css" data-styled-id="rCS1w3zcxh" data-styled-count="1">.rCS1w3zcxh {
+position: absolute;
+width: 1px;
+height: 1px;
+left: 0;
+top: 0;
+z-index: 3000;
+--moveable-color: #4af;
+--zoom: 1;
+--zoompx: 1px;
+--moveable-line-padding: 0;
+--moveable-control-padding: 0;
+will-change: transform;
+outline: 1px solid transparent;
+}
+.rCS1w3zcxh .moveable-control-box {
+z-index: 0;
+}
+.rCS1w3zcxh .moveable-line, .rCS1w3zcxh .moveable-control {
+position: absolute;
+left: 0;
+top: 0;
+will-change: transform;
+}
+.rCS1w3zcxh .moveable-control {
+width: 14px;
+height: 14px;
+border-radius: 50%;
+border: 2px solid #fff;
+box-sizing: border-box;
+background: #4af;
+background: var(--moveable-color);
+margin-top: -7px;
+margin-left: -7px;
+border: 2px solid #fff;
+z-index: 10;
+}
+.rCS1w3zcxh .moveable-around-control {
+position: absolute;
+will-change: transform;
+width: calc(var(--moveable-control-padding, 20) * 1px);
+height: calc(var(--moveable-control-padding, 20) * 1px);
+left: calc(var(--moveable-control-padding, 20) * -0.5px);
+top: calc(var(--moveable-control-padding, 20) * -0.5px);
+box-sizing: border-box;
+background: transparent;
+z-index: 8;
+cursor: alias;
+transform-origin: center center;
+}
+.rCS1w3zcxh .moveable-around-control[data-direction*="n"] {
+        top: calc(var(--moveable-control-padding, 20) * -1px);
+        transform-origin: center bottom;
+    }
+.rCS1w3zcxh .moveable-around-control[data-direction*="w"] {
+        left: calc(var(--moveable-control-padding, 20) * -1px);
+        transform-origin: right center;
+    }
+.rCS1w3zcxh .moveable-around-control[data-direction*="s"] {
+        top: 0px;
+        transform-origin: center top;
+    }
+.rCS1w3zcxh .moveable-around-control[data-direction*="e"] {
+        left: 0px;
+        transform-origin: left center;
+    }
+.rCS1w3zcxh .moveable-around-control[data-direction*="nw"] {
+        left: calc(var(--moveable-control-padding, 20) * -1px);top: calc(var(--moveable-control-padding, 20) * -1px);
+        transform-origin: right bottom;
+    }
+.rCS1w3zcxh .moveable-around-control[data-direction*="ne"] {
+        left: 0px;top: calc(var(--moveable-control-padding, 20) * -1px);
+        transform-origin: left bottom;
+    }
+.rCS1w3zcxh .moveable-around-control[data-direction*="sw"] {
+        left: calc(var(--moveable-control-padding, 20) * -1px);top: 0px;
+        transform-origin: right top;
+    }
+.rCS1w3zcxh .moveable-around-control[data-direction*="se"] {
+        left: 0px;top: 0px;
+        transform-origin: left top;
+    }
+.rCS1w3zcxh .moveable-padding {
+position: absolute;
+top: 0px;
+left: 0px;
+width: 100px;
+height: 100px;
+transform-origin: 0 0;
+}
+.rCS1w3zcxh .moveable-line {
+width: 1px;
+height: 1px;
+background: #4af;
+background: var(--moveable-color);
+transform-origin: 0px 50%;
+}
+.rCS1w3zcxh .moveable-line.moveable-edge {
+z-index: 1;
+background: transparent;
+}
+.rCS1w3zcxh .moveable-line.moveable-dashed {
+box-sizing: border-box;
+background: transparent;
+}
+.rCS1w3zcxh .moveable-line.moveable-dashed.moveable-horizontal {
+border-top: 1px dashed #4af;
+border-top-color: #4af;
+border-top-color: var(--moveable-color);
+}
+.rCS1w3zcxh .moveable-line.moveable-dashed.moveable-vertical {
+border-left: 1px dashed #4af;
+border-left-color: #4af;
+border-left-color: var(--moveable-color);
+}
+.rCS1w3zcxh .moveable-line.moveable-vertical {
+transform: translateX(-50%);
+}
+.rCS1w3zcxh .moveable-line.moveable-horizontal {
+transform: translateY(-50%);
+}
+.rCS1w3zcxh .moveable-line.moveable-vertical.moveable-bold {
+width: 2px;
+}
+.rCS1w3zcxh .moveable-line.moveable-horizontal.moveable-bold {
+height: 2px;
+}
+
+.rCS1w3zcxh .moveable-control.moveable-origin {
+border-color: #f55;
+background: #fff;
+width: 12px;
+height: 12px;
+margin-top: -6px;
+margin-left: -6px;
+pointer-events: none;
+}
+
+.rCS1w3zcxh .moveable-direction[data-rotation="0"],  .moveable-view-control-rotation0 {
+cursor:ns-resize;cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32px" height="32px" viewBox="0 0 32 32" ><path d="M 16,5 L 12,10 L 14.5,10 L 14.5,22 L 12,22 L 16,27 L 20,22 L 17.5,22 L 17.5,10 L 20, 10 L 16,5 Z" stroke-linejoin="round" stroke-width="1.2" fill="black" stroke="white" style="transform:rotate(0deg);transform-origin: 16px 16px"></path></svg>') 16 16, ns-resize;
+}
+
+
+.rCS1w3zcxh .moveable-direction[data-rotation="15"],  .moveable-view-control-rotation15 {
+cursor:ns-resize;cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32px" height="32px" viewBox="0 0 32 32" ><path d="M 16,5 L 12,10 L 14.5,10 L 14.5,22 L 12,22 L 16,27 L 20,22 L 17.5,22 L 17.5,10 L 20, 10 L 16,5 Z" stroke-linejoin="round" stroke-width="1.2" fill="black" stroke="white" style="transform:rotate(15deg);transform-origin: 16px 16px"></path></svg>') 16 16, ns-resize;
+}
+
+
+.rCS1w3zcxh .moveable-direction[data-rotation="30"],  .moveable-view-control-rotation30 {
+cursor:nesw-resize;cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32px" height="32px" viewBox="0 0 32 32" ><path d="M 16,5 L 12,10 L 14.5,10 L 14.5,22 L 12,22 L 16,27 L 20,22 L 17.5,22 L 17.5,10 L 20, 10 L 16,5 Z" stroke-linejoin="round" stroke-width="1.2" fill="black" stroke="white" style="transform:rotate(30deg);transform-origin: 16px 16px"></path></svg>') 16 16, nesw-resize;
+}
+
+
+.rCS1w3zcxh .moveable-direction[data-rotation="45"],  .moveable-view-control-rotation45 {
+cursor:nesw-resize;cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32px" height="32px" viewBox="0 0 32 32" ><path d="M 16,5 L 12,10 L 14.5,10 L 14.5,22 L 12,22 L 16,27 L 20,22 L 17.5,22 L 17.5,10 L 20, 10 L 16,5 Z" stroke-linejoin="round" stroke-width="1.2" fill="black" stroke="white" style="transform:rotate(45deg);transform-origin: 16px 16px"></path></svg>') 16 16, nesw-resize;
+}
+
+
+.rCS1w3zcxh .moveable-direction[data-rotation="60"],  .moveable-view-control-rotation60 {
+cursor:nesw-resize;cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32px" height="32px" viewBox="0 0 32 32" ><path d="M 16,5 L 12,10 L 14.5,10 L 14.5,22 L 12,22 L 16,27 L 20,22 L 17.5,22 L 17.5,10 L 20, 10 L 16,5 Z" stroke-linejoin="round" stroke-width="1.2" fill="black" stroke="white" style="transform:rotate(60deg);transform-origin: 16px 16px"></path></svg>') 16 16, nesw-resize;
+}
+
+
+.rCS1w3zcxh .moveable-direction[data-rotation="75"],  .moveable-view-control-rotation75 {
+cursor:ew-resize;cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32px" height="32px" viewBox="0 0 32 32" ><path d="M 16,5 L 12,10 L 14.5,10 L 14.5,22 L 12,22 L 16,27 L 20,22 L 17.5,22 L 17.5,10 L 20, 10 L 16,5 Z" stroke-linejoin="round" stroke-width="1.2" fill="black" stroke="white" style="transform:rotate(75deg);transform-origin: 16px 16px"></path></svg>') 16 16, ew-resize;
+}
+
+
+.rCS1w3zcxh .moveable-direction[data-rotation="90"],  .moveable-view-control-rotation90 {
+cursor:ew-resize;cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32px" height="32px" viewBox="0 0 32 32" ><path d="M 16,5 L 12,10 L 14.5,10 L 14.5,22 L 12,22 L 16,27 L 20,22 L 17.5,22 L 17.5,10 L 20, 10 L 16,5 Z" stroke-linejoin="round" stroke-width="1.2" fill="black" stroke="white" style="transform:rotate(90deg);transform-origin: 16px 16px"></path></svg>') 16 16, ew-resize;
+}
+
+
+.rCS1w3zcxh .moveable-direction[data-rotation="105"],  .moveable-view-control-rotation105 {
+cursor:ew-resize;cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32px" height="32px" viewBox="0 0 32 32" ><path d="M 16,5 L 12,10 L 14.5,10 L 14.5,22 L 12,22 L 16,27 L 20,22 L 17.5,22 L 17.5,10 L 20, 10 L 16,5 Z" stroke-linejoin="round" stroke-width="1.2" fill="black" stroke="white" style="transform:rotate(105deg);transform-origin: 16px 16px"></path></svg>') 16 16, ew-resize;
+}
+
+
+.rCS1w3zcxh .moveable-direction[data-rotation="120"],  .moveable-view-control-rotation120 {
+cursor:nwse-resize;cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32px" height="32px" viewBox="0 0 32 32" ><path d="M 16,5 L 12,10 L 14.5,10 L 14.5,22 L 12,22 L 16,27 L 20,22 L 17.5,22 L 17.5,10 L 20, 10 L 16,5 Z" stroke-linejoin="round" stroke-width="1.2" fill="black" stroke="white" style="transform:rotate(120deg);transform-origin: 16px 16px"></path></svg>') 16 16, nwse-resize;
+}
+
+
+.rCS1w3zcxh .moveable-direction[data-rotation="135"],  .moveable-view-control-rotation135 {
+cursor:nwse-resize;cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32px" height="32px" viewBox="0 0 32 32" ><path d="M 16,5 L 12,10 L 14.5,10 L 14.5,22 L 12,22 L 16,27 L 20,22 L 17.5,22 L 17.5,10 L 20, 10 L 16,5 Z" stroke-linejoin="round" stroke-width="1.2" fill="black" stroke="white" style="transform:rotate(135deg);transform-origin: 16px 16px"></path></svg>') 16 16, nwse-resize;
+}
+
+
+.rCS1w3zcxh .moveable-direction[data-rotation="150"],  .moveable-view-control-rotation150 {
+cursor:nwse-resize;cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32px" height="32px" viewBox="0 0 32 32" ><path d="M 16,5 L 12,10 L 14.5,10 L 14.5,22 L 12,22 L 16,27 L 20,22 L 17.5,22 L 17.5,10 L 20, 10 L 16,5 Z" stroke-linejoin="round" stroke-width="1.2" fill="black" stroke="white" style="transform:rotate(150deg);transform-origin: 16px 16px"></path></svg>') 16 16, nwse-resize;
+}
+
+
+.rCS1w3zcxh .moveable-direction[data-rotation="165"],  .moveable-view-control-rotation165 {
+cursor:ns-resize;cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32px" height="32px" viewBox="0 0 32 32" ><path d="M 16,5 L 12,10 L 14.5,10 L 14.5,22 L 12,22 L 16,27 L 20,22 L 17.5,22 L 17.5,10 L 20, 10 L 16,5 Z" stroke-linejoin="round" stroke-width="1.2" fill="black" stroke="white" style="transform:rotate(165deg);transform-origin: 16px 16px"></path></svg>') 16 16, ns-resize;
+}
+
+
+.rCS1w3zcxh .moveable-line.moveable-direction:before {
+content: "";
+position: absolute;
+width: 100%;
+height: calc(var(--moveable-line-padding, 0) * 1px);
+bottom: 0;
+left: 0;
+}
+.rCS1w3zcxh .moveable-group {
+z-index: -1;
+}
+.rCS1w3zcxh .moveable-area {
+position: absolute;
+}
+.rCS1w3zcxh .moveable-area-pieces {
+position: absolute;
+top: 0;
+left: 0;
+display: none;
+}
+.rCS1w3zcxh .moveable-area.moveable-avoid, .rCS1w3zcxh .moveable-area.moveable-pass {
+pointer-events: none;
+}
+.rCS1w3zcxh .moveable-area.moveable-avoid+.moveable-area-pieces {
+display: block;
+}
+.rCS1w3zcxh .moveable-area-piece {
+position: absolute;
+}
+
+
+.rCS1w3zcxh {
+--bounds-color: #d66;
+}
+.rCS1w3zcxh .moveable-guideline {
+pointer-events: none;
+z-index: 2;
+}
+.rCS1w3zcxh .moveable-guideline.moveable-bounds {
+background: #d66;
+background: var(--bounds-color);
+}
+.rCS1w3zcxh .moveable-guideline-group {
+position: absolute;
+top: 0;
+left: 0;
+}
+.rCS1w3zcxh .moveable-guideline-group .moveable-size-value {
+position: absolute;
+color: #f55;
+font-size: 12px;
+font-size: calc(12px * var(--zoom));
+font-weight: bold;
+}
+.rCS1w3zcxh .moveable-guideline-group.moveable-horizontal .moveable-size-value {
+transform-origin: 50% 100%;
+transform: translateX(-50%);
+left: 50%;
+bottom: 5px;
+bottom: calc(2px + 3px * var(--zoom));
+}
+.rCS1w3zcxh .moveable-guideline-group.moveable-vertical .moveable-size-value {
+transform-origin: 0% 50%;
+top: 50%;
+transform: translateY(-50%);
+left: 5px;
+left: calc(2px + 3px * var(--zoom));
+}
+.rCS1w3zcxh .moveable-guideline.moveable-gap {
+background: #f55;
+}
+.rCS1w3zcxh .moveable-size-value.moveable-gap {
+color: #f55;
+}
+
+.rCS1w3zcxh .moveable-edge.moveable-edgeDraggable.moveable-line {
+cursor: move;
+}
+.rCS1w3zcxh .moveable-rotation {
+position: absolute;
+height: 40px;
+width: 1px;
+transform-origin: 50% 100%;
+height: calc(40px * var(--zoom));
+top: auto;
+left: 0;
+bottom: 100%;
+will-change: transform;
+}
+.rCS1w3zcxh .moveable-rotation .moveable-rotation-line {
+display: block;
+width: 100%;
+height: 100%;
+transform-origin: 50% 50%;
+}
+.rCS1w3zcxh .moveable-rotation .moveable-rotation-control {
+border-color: #4af;
+border-color: var(--moveable-color);
+background:#fff;
+cursor: alias;
+}
+ .moveable-view-rotation-dragging, .rCS1w3zcxh .moveable-rotatable.moveable-direction.moveable-control {
+cursor: alias;
+}
+.rCS1w3zcxh .moveable-rotatable.moveable-direction.moveable-control.moveable-move {
+cursor: move;
+}
+
+.rCS1w3zcxh[data-able-origindraggable] .moveable-control.moveable-origin {
+pointer-events: auto;
+}
+.rCS1w3zcxh .moveable-control.moveable-clip-control {
+background: #6d6;
+cursor: pointer;
+}
+.rCS1w3zcxh .moveable-control.moveable-clip-control.moveable-clip-radius {
+background: #d66;
+}
+.rCS1w3zcxh .moveable-line.moveable-clip-line {
+background: #6e6;
+cursor: move;
+z-index: 1;
+}
+.rCS1w3zcxh .moveable-clip-area {
+position: absolute;
+top: 0;
+left: 0;
+}
+.rCS1w3zcxh .moveable-clip-ellipse {
+position: absolute;
+cursor: move;
+border: 1px solid #6d6;
+border: var(--zoompx) solid #6d6;
+border-radius: 50%;
+transform-origin: 0px 0px;
+}
+.rCS1w3zcxh {
+--bounds-color: #d66;
+}
+.rCS1w3zcxh .moveable-guideline {
+pointer-events: none;
+z-index: 2;
+}
+.rCS1w3zcxh .moveable-line.moveable-guideline.moveable-bounds {
+background: #d66;
+background: var(--bounds-color);
+}
+.rCS1w3zcxh .moveable-control.moveable-border-radius {
+background: #d66;
+cursor: pointer;
+z-index: 3;
+}
+.rCS1w3zcxh .moveable-control.moveable-border-radius.moveable-vertical {
+background: #d6d;
+z-index: 2;
+}
+.rCS1w3zcxh .moveable-control.moveable-border-radius.moveable-virtual {
+opacity: 0.5;
+z-index: 1;
+}
+.rCS1w3zcxh.moveable-round-line-clickable .moveable-line.moveable-direction {
+cursor: pointer;
+}</style></head>
+
+  <body>
+    <h1>Enron Email Dataset</h1>
+
+
+    This dataset was collected and prepared by the <a href="http://www.ai.sri.com/project/CALO">CALO Project</a> (A
+    Cognitive Assistant that Learns and Organizes).  It contains data
+    from about 150 users, mostly senior management of Enron, 
+    organized into folders.  The corpus contains 
+    a total of about 0.5M messages.
+    This data was originally <a href="http://www.salon.com/news/feature/2003/10/14/enron/index_np.html">made
+    public, and posted to the web</a>, by the <a href="http://www.ferc.gov/">Federal Energy Regulatory
+    Commission</a> during its investigation.
+
+    <p>
+    The email dataset was later purchased by <a href="http://www.ai.mit.edu/people/lpk/lpk.html">Leslie
+    Kaelbling</a> at MIT, and turned out to have a number of integrity
+    problems.  A number of folks at SRI, notably <a href="http://www.ai.sri.com/people/gervasio">Melinda Gervasio</a>,
+    worked hard to correct these problems, and it is thanks to them
+    (not me) that the dataset is available.  The dataset here does not
+    include attachments, and some messages have been deleted "as part
+    of a redaction effort due to requests from affected
+    employees". Invalid email addresses were converted to something of
+    the form user@enron.com whenever possible (i.e., recipient is
+    specified in some parse-able format like "Doe, John" or "Mary
+    K. Smith") and to no_address@enron.com when no recipient was
+    specified.</p>
+
+    <p>I get a number of questions about this corpus each week, which
+    I am unable to answer, mostly because they deal with preparation
+    issues and such that I just don't know about.  If you ask me a
+    question and I don't answer, please don't feel slighted.
+
+      
+    </p><p>I am distributing this dataset as a resource for researchers
+    who are interested in improving current email tools, or
+    understanding how email is currently used.  This data is valuable;
+    to my knowledge it is the only substantial collection of "real"
+    email that is public.  The reason other datasets are not public is
+    because of privacy concerns. In using this dataset, please be
+    sensitive to the privacy of the people involved (and remember that
+    many of these people were certainly not involved in any of the
+    actions which precipitated the investigation.)
+
+    </p><ul>
+       <li>Prior versions of the dataset are <b>no longer
+	 being distributed.</b>  If you are using the 
+         March 2, 2004 Version; the August 21, 2009 Version; 
+         or the April 2, 2011 Version of this dataset for
+	 your work, you are requested to replace it with the newer
+	 version of the dataset below, or make
+	 the <a href="https://www.cs.cmu.edu/~./enron/DELETIONS.txt">the appropriate changes</a> to
+	 your local copy. 
+
+       </li><li><a href="https://www.cs.cmu.edu/~./enron/enron_mail_20150507.tar.gz">May 7, 2015 Version
+	 of dataset</a> (about 1.7Gb, tarred and gzipped).  
+	 
+    </li></ul>
+
+
+    <p>There are also several on-line databases that allow you to
+    search the data, at
+    <a href="http://orange.sims.berkeley.edu/~atf/enron/enron.cgi">UCB</a>, and
+      <a href="http://www.enron-mail.com/">www.enron-mail.com</a></p>
+
+    <h2>Research uses of the dataset</h2>
+
+    This is a partial and poorly maintained list. If I've left your
+    work out, don't take it personally, and feel free to send me a
+    pointer and/or description.
+
+    <ul>
+      
+      <li><a href="http://ceas.cc/2004/168.pdf">A paper
+      describing the Enron data</a> was presented at the 2004 <a href="http://www.ceas.cc/">CEAS conference.</a></li>
+
+      <li>Some experiments associated with this data are described on
+      <a href="http://www.cs.umass.edu/~ronb">Ron Bekkerman</a>'s home
+      page.</li>
+
+      <li>A social-network analysis of the data, including <a href="http://cs.umass.edu/~corrada/enron">"useful mappings
+      between the MD5 digest of the email bodies and such things as
+      authors, recipients, etc"</a>, is available from <a href="http://cs.umass.edu/~corrada/enron">Andres
+      Corrada-Emmanuel</a>.</li>
+
+      <li>A group from <apwdpwd href="http://bailando.sims.berkeley.edu/enron_email.html">SIMS,
+      UC Berkeley provides search, visualization, and some email
+      that has been labeled with topic and sentiment labels</apwdpwd></li>
+
+      <li><a href="http://www.isi.edu/~adibi/Enron/Enron.htm">Jitesh
+      Shetty</a> has put up a database of link-analysis results.</li>
+
+      <li><a href="http://edrm.net/resources/data-sets/enron-data-set-files">A
+      version of the dataset with all attachments</a> is available
+      from <a href="http://edrm.net/">EDRM</a>.
+
+      </li><li>Work at the University of Pennsylvania includes <a href="https://dbappserv.cis.upenn.edu/spell/">a query dataset
+      for email search as well as a tool for generating spelling
+      errors</a> based on the Enron corpus.
+
+      </li><li>Kimmie Farrington and colleagues published a paper in 2011
+      that uses the Enron dataset as part of the test corpus for their
+      work on crowdsourcing human vs. computer generated
+      classification explanation: see Hutton, Amanda, Alexander Liu,
+      and Cheryl Martin. "Crowdsourcing evaluations of classifier
+      interpretability." In <i>Proceedings of the 2012 AAAI Spring
+      Symposium on Wisdom of the Crowd</i>
+
+      </li><li><a href="http://www.parakweet.com/">Parakweet</a> has
+	released
+	an <a href="https://github.com/ParakweetLabs/EmailIntentDataSet">open
+	source set of Enron sentence data, labeled for speech
+	acts.</a>
+
+	</li><li>
+	A set
+	of <a href="https://github.com/Charlie9/enron_intent_dataset_verified">sentence
+	level annotations (of what requires action or response from
+	user)</a> has been released by Charlie Oxborough.
+
+    </li></ul>
+
+    <hr>
+    <address>William W. Cohen, MLD, CMU</address> <!-- Created: Tue
+    Mar 16 16:05:06 EST 2004 --> <!-- hhmts start --> Last modified:
+    Fri May  8 09:52:31 EDT 2015
+  
+
+<extend-speak-to-chatgpt data-v-app=""><!----><div data-styled-id="rCS1w3zcxh" data-able-draggable="true" data-able-padding="true" data-able-clickable="true" class="moveable-control-box    moveable rCS1w3zcxh" style="position: absolute; display: none; visibility: visible; transform: translate3d(0px, 0px, 0px); --zoom: 1; --zoompx: 1px;"><div data-rotation="-1" data-line-key="render-line-0" data-direction="" class="moveable-line moveable-direction  " style="transform: translateY(-50%) translate(0px, 0px) rotate(0rad) scaleY(1); width: 0px;"></div><div data-rotation="-1" data-line-key="render-line-1" data-direction="" class="moveable-line moveable-direction  " style="transform: translateY(-50%) translate(0px, 0px) rotate(0rad) scaleY(1); width: 0px;"></div><div data-rotation="-1" data-line-key="render-line-2" data-direction="" class="moveable-line moveable-direction  " style="transform: translateY(-50%) translate(0px, 0px) rotate(0rad) scaleY(1); width: 0px;"></div><div data-rotation="-1" data-line-key="render-line-3" data-direction="" class="moveable-line moveable-direction  " style="transform: translateY(-50%) translate(0px, 0px) rotate(0rad) scaleY(1); width: 0px;"></div></div></extend-speak-to-chatgpt></body></html>

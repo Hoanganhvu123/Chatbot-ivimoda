@@ -1,0 +1,162 @@
+Quy Định Sử Dụng Dịch Vụ Email Marketing Tại
+TENTEN
+1. Về vấn đề Spam
+Spam là gì? Thế nào là spam?
+Việc gửi email marketing tại hệ thống của TENTEN bắt buộc phải tuân theo quy định về
+nhà nước về CAN-SPAM được quy định tại:
+http://mic.gov.vn/phapdien/Pages/TinTuc/102029/Nghi-dinh-90-2008-Nd-CP.html
+
+Các nguyên tắc cơ bản
+Để tuân thủ các luật CAN-SPAM trên TENTEN, bạn hoàn toàn phải tuân theo các yêu
+cầu sau:
+1. Địa chỉ cụ thể: khách hàng của bạn cần biết chính xác về xuất xứ, nguồn gốc của
+doanh nghiệp của bạn vì thế thư của bạn khi được gửi đi phải đảm bảo rằng có đầy đủ
+thông tin về tổ chức. Có thể là địa chỉ hiện tại đường phố, hoặc email được gửi đi từ một
+hộp bưu điện hay một hộp thư thương mại tư nhân.
+( Tuyệt đối không gửi thư cho khách mà không giải thích rõ bạn là ai và tại sao họ lại
+nhận được thư của bạn và Nếu họ muốn ngừng nhận thư của bạn thì cần làm như thế
+nào? )
+2. Lựa chọn phương pháp gửi thư điện tử an toàn, minh bạch nhất: Nội dung email phải
+dễ hiểu, hình thức rõ ràng, bất cứ một lá thư email marketing được gửi đi hãy chắc chắn
+rằng nó không chứa nôi dung quảng cáo không đúng sự thật họặc gây “nhiễu” dẫn đến
+hiểu lầm.
+=> những nội dung như vậy dễ bị khách hàng report là SPAM.
+3. Xử lí phản hồi nhanh chóng: Nêú khách hàng của bạn phản hồi không mấy tích cực về
+sản phẩm dịch vụ email marketing của doanh nhiệp, hoặc tệ hơn họ yêu cầu bạn không
+được gửi thư cho họ nữa. Hãy cố gắng chứng minh cho họ hiểu về mục đích tốt đẹp của
+những là thư trên. Nếu không thể thuyết phục được khách hàng của mình doanh nghiệp
+buộc phải loại bỏ khách hàng đó ra khỏi danh sách gửi email tự động trong vòng 10
+ngày.
+4. Theo dõi khi trao quyền gửi thư thay thế: Nếu ai đó gửi thư điện tử thay cho bạn, có
+thể là một trợ lí “ảo” hoặc một đối tác sử dụng email của bạn để gửi thư bạn cần theo
+dõi các tin nhắn được gửi đi một cách cẩn thận, đó là trách nhiệm của bạn để giám sát
+các chiến dịch email marketing và giải quyết khủng hoảng ngay khi có vấn đề xảy ra.
+
+Chú ý Những điều “Không được làm” trong đạo luật Can- Spam
+
+1. Không thêm bất cứ ai vào danh sách của bạn khi chưa được phép: Ví dụ, nếu bạn gặp
+những người tại các hội nghị và trao đổi thẻ kinh doanh với họ , không nên thêm địa chỉ
+email vào danh sách khách hàng của bạn khi họ không phải là đối tượng khách hàng
+tiềm năng của doanh nghiệp hay khi chưa được sự cho phép của khách hàng.
+2. Chia sẻ hoặc bán địa chỉ email. Những người đăng ký danh sách tin cậy của bạn, bạn
+cần giữ cho thông tin của mình an toàn.
+Đừng phản bội niềm tin của khách hàng bằng cách chia sẻ hoặc bán các địa chỉ email
+liên lạc cho doanh nghiệp khác.
+3. Không sử dụng các từ ngữ mang tính quảng cáo như “cơ hội duy nhất” “nhấp vào
+link”. Đây là những từ ngữ dễ lọt vào tầm ngắm của bộ lọc Spam.
+4. Không gửi thư điện tử cho nhiều người trong doanh nghiệp của bạn. Khi đó tường lửa
+email của công ty có thể mặc định đó là một cuộc tấn công thư rác và bộ lọc Spam dễ
+dàng thu nạp vaò thùng thư Spam.
+5. Không nên gửi email chỉ có mỗi hình ảnh, bộ lọc email Spam sẽ cho rằng email đó
+chắc chắn có vấn đề và chặn lại. Cần đầu tư để viết nội dung email marketing hấp dẫn
+người dùng với bố cục và sử dụng hình ảnh hợp lí để tránh bộ lọc Spam.
+Chúng tôi không chịu trách nhiệm về những nội dung bạn gửi đi trong email, Nếu nó vi
+phạm các nguyên tắc CAN-SPAM theo luật pháp Việt Nam, chúng tôi có thể tạm khoá
+tài khoản hoặc ngừng chiến dịch của bạn mà không báo trước.
+Chấp hành đúng các nguyên tắc này là cách đảm bảo chiến dịch email marketing của
+bạn có kết quả tốt nhất.
+
+2. Tỉ lệ email hỏng
+1.Email hỏng là gì?
+Khi thực hiện chiến dịch email, nếu danh sách của bạn không tốt sẽ có 1 lượng email
+báo trả lại – tức là email hỏng.
+Có 2 dạng hỏng: hỏng cứng – email không tồn tại và hỏng mềm – email bị chặn nội
+dung hoặc hòm thư đến của email đó bị đầy ( trường hợp bị đầy email ít xảy ra vì dung
+lượng trong mỗi tài khoản rất lớn)
+Tỉ lệ email hỏng: Là % số lượng email báo trả lại tính trên số lượng email bạn đã gửi đi
+Tác hại của email hỏng
+•
+•
+•
+
+Tỉ lệ email hỏng càng lớn, uy tín và danh tiếng của bạn càng giảm
+Lãng phí nguồn lực của bạn
+Chiến dịch email marketing trở nên kém hiệu quả, tỉ lệ open và phản hồi thấp
+
+2. Làm thế nào để giảm thiểu email hỏng
+•
+•
+•
+
+Thu thập những email chất lượng bằng form đăng ký trên website của bạn
+Không mua bán danh sách email
+Không tìm kiếm và sử dụng danh sách email trên mạng internet
+
+Trong chức năng thống kê của chúng tôi có thống kê tỷ lệ Email hỏng, như ảnh minh
+họa
+
+3. Khóa tài khoản
+TENTEN sẽ thực hiện khoá tài khoản, từ chối cung cấp dịch vụ nếu tài khoản của bạn
+trong các trường hợp sau:
+•
+•
+•
+•
+
+Tỉ lệ email hỏng quá cao trên 7% và không có dấu hiệu khắc phục
+Bạn mắc lỗi này nhiều lần và không có dấu hiệu cải thiện hiệu quả của danh sách.
+Vi phạm về chinh sách chống thư rác của chúng tôi.
+Vi phạm về chính sách nội dung của chúng tôi.
+
+3. Chính sách chống thư rác
+Dành người nhận email, các ISP, Quản trị viên của các Blacklist
+TENTEN có một Chính Sách Chống Thư Rác nghiêm ngặt. Tài khoản của người dùng sẽ
+bị chấm dứt nếu họ gửi đi các email không được phép của người nhận. Xin hãy thông
+
+báo bất kỳ nghi ngờ vi phạm nào về hòm thư kythuat@tenten.vn.
+Các ISP và Quản trị viên của các Blacklist cũng có thể liên hệ với chúng tôi qua
+kythuat@tenten.vn, xin hãy chuyển tiếp cho chúng tôi toàn bộ email vi phạm, bao gồm
+cả phần header. Nếu được, hãy dừng nhận tin bằng cách dùng đường link ở cuối email
+khi bạn không muốn nhận thêm email từ người gửi.
+Chúng tôi sẽ có hành động thích hợp đối với người gửi email vi phạm theo đúng chính
+sách này.
+________________________________________
+Đối với người dùng TENTEN
+Tất cả những người dùng phần mềm TENTEN đều phải đồng ý chỉ gửi đi các bản tin
+email được phép của người nhận khi đăng ký sử dụng dịch vụ của chúng tôi. Điều này
+có nghĩa là tất cả email của người nhận đều phải đã xác nhận opt-in với cá nhân hoặc tổ
+chức gửi email.
+Việc opt-in có thể thực hiện thông qua hình thức form đăng ký trên website, form đăng
+ký điện tử tại một địa điểm, hoặc bản đăng ký vật lý (trên giấy hoặc các chất liệu khác).
+Bất kì form đăng ký opt-in nào cũng nên có mô tả rõ ràng về những thứ sẽ được gửi và
+mức độ thường xuyên gửi. Các danh sách đi mua không được sử dụng trong hệ thống
+TENTEN, bất kể nguồn gốc hoặc tình trạng cho phép. Ngoài ra, TENTEN cũng đưa ra
+các điều kiện khi bạn gửi một chiến dịch email marketing. Với mỗi chiến dịch email
+marketing, bạn cần đảm bảo tỉ lệ email hỏng dưới 7%. Điều này giúp TENTEN xây dựng
+dịch vụ email marketing ngày càng chất lượng hơn và đem tới hiệu quả thực sự cho
+khách hàng.
+
+4. Chính sách nội dung
+TENTEN ngăn cấm tuyệt đối việc sử dụng website, phần mềm hoặc dịch vụ của
+TENTEN từ bất cứ bên nào mà bên đó có tham gia vào, hoặc đăng bài lên website của
+bên đó những nội dung liên quan đến, phân phối, cung cấp, hiển thị, thực hiện, lôi kéo,
+thể hiện và/hoặc bán hoặc cho thuê (có thể dùng được) bất kỳ một trong cái sau đây
+(“Nội Dung Bị Cấm”):
+•
+•
+•
+•
+•
+
+•
+•
+
+1. Nội dung khiêu dâm, ảnh khoả thân, cờ bạc trực tuyến; hàng hoá, dịch vụ bất
+hợp pháp; các sản phẩm giả mạo hoặc lừa đảo.
+2. Danh sách email, cung cấp danh sách email, newsgroup, hoặc các địa chỉ
+email rác.
+3. Nội dung hoặc tài liệu lợi dụng hoặc có hại cho trẻ em dưới 18 tuổi.
+4. Bất kỳ thông tin nhận dạng cá nhân hoặc thông tin riêng tư.
+5. Những nội dung: trái pháp luật; gây phản cảm, phân biệt đối xử, phân biệt
+chủng tộc, thù hận hoặc thô tục quá mức, bôi nhọ, nói xấu, quá bạo lực, đe dọa,
+quấy rối;Virus, sâu, mã độc và/hoặc Trojan.
+6. Nội dung vi phạm bất kỳ tài sản trí tuệ, đạo đức hay quyền riêng tư của bên thứ
+ba.
+7. Việc gửi email không được phép của người nhận hay “thư rác” là BỊ CẤM.
+
+Nội dung có thể được coi là Nội Dung Bị Cấm bởi TENTEN, tùy theo sự xuy xét của
+TENTEN. TENTEN duy trì quyền cấm sự dụng website, phần mềm hoặc/và dịch vụ của
+TENTEN bởi bất cứ bên nào, tùy theo sự suy xét của TENTEN.
+Tài liệu này có thể thay đổi theo thời gian.
+
+

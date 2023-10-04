@@ -1,0 +1,804 @@
+function calculateTime(countDownDate, { day, hour, minute, second }) {
+  // Get today's date and time
+  var now = new Date().getTime();
+
+  // Find the distance between now and the count down date
+  var distance = countDownDate - now;
+
+  // Time calculations for days, hours, minutes and seconds
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  day.html(days);
+  hour.html(hours);
+  minute.html(minutes);
+  second.html(seconds);
+}
+
+function countDown(dateEnd, { day, hour, minute, second }) {
+  // Set the date we're counting down to
+  var countDownDate = new Date(dateEnd).getTime();
+  calculateTime(countDownDate, { day, hour, minute, second });
+  // Update the count down every 1 second
+  var x = setInterval(function () {
+    calculateTime(countDownDate, { day, hour, minute, second });
+  }, 1000);
+}
+
+(function ($) {
+  "use strict";
+  $(document).ready(function () {
+    $(".auth__block .auth__title").on("click", function (e) {
+      if (window.innerWidth < 768) {
+        e.preventDefault();
+        $(this).toggleClass("active");
+        $(this).siblings(".auth__login__content").slideToggle();
+        $(".auth__block .auth__title")
+          .not($(this))
+          .siblings(".auth__login__content")
+          .slideUp();
+        $(".auth__block .auth__title").not($(this)).removeClass("active");
+      }
+    });
+
+    $(".ds__list .ds__province h4").on("click", function (e) {
+      e.preventDefault();
+      $(this).parent().toggleClass("active");
+      $(".ds__list .ds__province").not($(this).parent()).removeClass("active");
+    });
+
+    $(".product-detail__rating-wrapper").each(function () {
+      var percentage = Number($(this).data("percentage"));
+      $(this)
+        .find(".product-detail__rating__bar")
+        .css({
+          width: `${percentage}%`,
+        });
+    });
+
+    $(".product-detail__flash-sale__time").each(function () {
+      var dateEnd = $(this).data("time");
+      var day = $(this).find("#days");
+      var hour = $(this).find("#hours");
+      var minute = $(this).find("#minutes");
+      var second = $(this).find("#seconds");
+
+      countDown(dateEnd, {
+        day,
+        hour,
+        minute,
+        second,
+      });
+    });
+
+    $(".product-detail__tab .tab-item").on("click", function () {
+      const itemIndex = $(this).index();
+      $(".product-detail__tab .tab-content").each(function (index) {
+        if (index === itemIndex) {
+          $(this).addClass("active");
+        } else {
+          $(this).removeClass("active");
+        }
+      });
+      $(".product-detail__tab .tab-item").each(function (index) {
+        if (index === itemIndex) {
+          $(this).addClass("active");
+        } else {
+          $(this).removeClass("active");
+        }
+      });
+    });
+
+    $(".star-rating .star-rating__background .star-rating__backgroud-item").on(
+      "click",
+      function () {
+        var index = ($(this).index() + 1) * 20;
+        $(".star-rating .star-rating__bar").css({
+          width: `${index}%`,
+        });
+        $(".star-rating input[hidden]").val(`${index}%`);
+      }
+    );
+
+
+    // Product image slider
+    if (typeof Swiper === "function") {
+      const smallProductSlider = new Swiper(
+        ".product-gallery__slide--small .swiper-container",
+        {
+          slidesPerView: 4.25,
+          direction: $(window).innerWidth() >= 768 ? "vertical" : "horizontal",
+          watchSlidesProgress: true,
+          spaceBetween: 8,
+          navigation: {
+            prevEl: ".product-gallery__slide--small .swiper-nav-prev",
+            nextEl: ".product-gallery__slide--small .swiper-nav-next",
+          },
+          breakpoints: {
+            768: {
+              slidesPerView: 4,
+            },
+          },
+        }
+      );
+      const bigProductSlider = new Swiper(
+        ".product-gallery__slide--big .swiper-container",
+        {
+          slidesPerView: 1,
+          effect: "fade",
+          fadeEffect: {
+            crossfade: true,
+          },
+          navigation: {
+            prevEl: ".product-gallery__slide--big .swiper-nav-prev",
+            nextEl: ".product-gallery__slide--big .swiper-nav-next",
+          },
+          thumbs: {
+            swiper: smallProductSlider,
+          },
+        }
+      );
+    }
+
+    $("#user_avatar_input").on("change", function (e) {
+      if (e.target.files[0]) {
+        var file = e.target.files[0];
+        var typeimage = false;
+        if(file.type == 'image/png'){
+            typeimage = true;
+        }
+        if(file.type == 'image/jpeg'){
+            typeimage = true;
+        }
+        if( typeimage == false) {
+            toastr.info('Hình ảnh không đúng định dạng png hoặc jpeg !');
+            return;
+        }
+        if(file.size > 1048576){
+            toastr.info('Kích thước hình ảnh phải nhỏ hơn 1MB !');
+            return;
+        }
+        var reader = new FileReader();
+        reader.onloadend = function () {
+          $.ajax({
+            type: "post",
+            url: base_url+"customer/up_img",
+            data: {
+              imgBase64: reader.result,
+            },
+            dataType: "Json",
+            beforeSend: function () {
+            },
+            success: function (response) {
+            },
+            complete: function () {
+            },
+          });
+          $("#user_avatar_preview").attr("src", reader.result);
+        };
+        reader.readAsDataURL(file);
+
+      }
+    });
+
+    $(".order-sidemenu__user").on("click", function (e) {
+      if ($(window).innerWidth() <= 1024) {
+        e.preventDefault();
+        $(this).siblings(".order-sidemenu__menu").slideToggle();
+      }
+    });
+
+    $(".product-detail__quantity-input").each(function () {
+      const size = $(this).find("input[name=size_checked]");
+      const incBtn = $(this).find(".product-detail__quantity--increase");
+      const decBtn = $(this).find(".product-detail__quantity--decrease");
+      const input = $(this).find('input[type="number"]');
+      incBtn.on("click", function (e) {
+        if (size.val() == '') {
+          toastr.info('Bạn chưa chọn size !');
+        } else if (size.val() == 0) {
+            toastr.info('Sản phẩm đã hết hàng Online. Bạn có thể "Tìm tại cửa hàng" !');
+        } else {
+          if (Number(input.val()) < Number(size.attr('data-quantity'))) {
+            const currentVal = Number(input.val());
+            e.preventDefault();
+            input.val(Number(currentVal) + Number(1));
+          }
+        }
+      });
+      decBtn.on("click", function (e) {
+        if (size.val() == '') {
+          toastr.info('Bạn chưa chọn size !');
+        } else if (size.val() == 0) {
+            toastr.info('Sản phẩm đã hết hàng Online. Bạn có thể "Tìm tại cửa hàng" !');
+        } else {
+          const currentVal = Number(input.val());
+          e.preventDefault();
+          input.val(currentVal - 1 < 0 ? 0 : currentVal - 1);
+        }
+      });
+    });
+
+    var clickschangeEmail = 0;
+    $("#changeEmail").click(function(){
+      if(clickschangeEmail == 0){
+        var customer_email = $('#customer_email').val();
+        $.ajax({
+          type: "post",
+          url: base_url+"customer/change_email",
+          data: {
+            customer_email: customer_email,
+          },
+          dataType: "Json",
+          beforeSend: function () {
+              clickschangeEmail = 1;
+              $('#changeEmail').html("<img style='width: 40px;height: 40px' src='../assets/images/loading-buffering.gif' />");
+          },
+          success: function (response) {
+            if(response.status){
+              clickschangeEmail = 1;
+                toastr.success(response.data);
+            }else {
+                clickschangeEmail = 0;
+                toastr.info(response.data);
+            }
+          },
+          complete: function () {
+             $('#changeEmail').text("Thay đổi");
+          },
+        });
+      }
+    });
+    var cash_show = 1;
+    $("#cash_show").click(function(){
+     if (cash_show == 1){
+        $(".cash_show").removeClass("hidden");
+        $(".cash_hidden").addClass("hidden");
+        cash_show = 0;
+      }else {
+        $(".cash_show").addClass("hidden");
+        $(".cash_hidden").removeClass("hidden");
+        cash_show = 1;
+      }
+    });
+    $("#change_pass").click(function(){
+      var customer_pass_old = $('#customer_pass_old').val();
+      var customer_pass_new1 = $('#customer_pass_new1').val();
+      var customer_pass_new2 = $('#customer_pass_new2').val();
+      $.ajax({
+        type: "post",
+        url: base_url+"customer/change_pass",
+        data: {
+          customer_pass_old: customer_pass_old,
+          customer_pass_new1: customer_pass_new1,
+          customer_pass_new2: customer_pass_new2,
+        },
+        dataType: "Json",
+        beforeSend: function () {
+        },
+        success: function (response) {
+          if(response.status == false) {
+            for(var i = 0; i < response.errors.length; i++) {
+              toastr.info(response.errors[i]);
+            }
+          }else{
+            toastr.success('Bạn thay đổi mật khẩu thành công !');
+            window.location= base_url+"customer/info";
+          }
+        },
+        complete: function () {
+        },
+      });
+
+    });
+
+    var clicks = 0;
+    $("#change_phone").click(function(){
+      if (clicks == 0){
+        var customer_phone = $('#customer_phone').val();
+        $.ajax({
+          type: "post",
+          url: base_url+"customer/change_phone",
+          data: {
+            customer_phone: customer_phone,
+          },
+          dataType: "Json",
+          beforeSend: function () {
+              clicks = 1;
+              $('#change_phone').html("<img style='width: 40px;height: 40px' src='../assets/images/loading-buffering.gif' />");
+          },
+          success: function (response) {
+            $('#verify_token').val(response.verify_token);
+            if(response.status == true){
+              clicks = 1;
+              toastr.success(response.data);
+            }else{
+              clicks = 0;
+              toastr.info(response.data);
+            }
+          },
+            complete: function () {
+                $('#change_phone').text("Xác nhận");
+            },
+        });
+      }
+    });
+
+    $("#bnt_register").click(function(){
+        setBusy();
+       var mail = $('#email').val();
+        if (mail.search('@') < 0){
+            clearBusy();
+        }
+    });
+    
+    $("#btn-submit").click(function(e){
+        e.preventDefault();
+        setBusy();
+        var email_subscribe = $('#email_subscribe').val();
+
+        $.ajax({
+            type: "post",
+            url: base_url+"page/subscribe",
+            data: {
+                email: email_subscribe,
+            },
+            dataType: "Json",
+            beforeSend: function () {
+            },
+            success: function (response) {
+                if(response.response_type == 'success'){
+                    toastr.success('Bạn đăng ký thành công !');
+                }else{
+                    toastr.info(response.response_msg);
+                }
+                clearBusy();
+            },
+        });
+    });
+
+    $("#btn-submit-mb").click(function(e){
+      e.preventDefault();
+      setBusy();
+      var email_subscribe = $('#email_subscribe-mb').val();
+
+      $.ajax({
+          type: "post",
+          url: base_url+"page/subscribe",
+          data: {
+              email: email_subscribe,
+          },
+          dataType: "Json",
+          beforeSend: function () {
+          },
+          success: function (response) {
+              if(response.response_type == 'success'){
+                  toastr.success('Bạn đăng ký thành công !');
+              }else{
+                  toastr.info(response.response_msg);
+              }
+              clearBusy();
+          },
+      });
+    });
+
+    $(document).on('click', '#popup_btn_subscribe', function () {
+        setBusy();
+
+        var email_subscribe = $(this).prev().val();
+
+        $.ajax({
+            type: "post",
+            url: base_url+"page/subscribe",
+            data: {
+                email: email_subscribe,
+            },
+            dataType: "Json",
+            beforeSend: function () {
+            },
+            success: function (response) {
+                if(response.response_type == 'success'){
+                    $.fancybox.close();
+                    toastr.success('Voucher đã được gửi về email của bạn !');
+                }else{
+                    toastr.info(response.response_msg);
+                }
+                clearBusy();
+            },
+        });
+    });
+
+    $(document).on('click', '.btn-copy-voucher', function () {
+        var $temp = $("<input>");
+        $("body").append($temp);
+        $temp.val($(this).attr('data-voucher')).select();
+        document.execCommand("copy");
+        $temp.remove();
+        toastr.success('Thu thập mã thành công !');
+    });
+
+    $('.get-otp-login').on('click', function () {
+        let customer_account = $('input[name=customer_account]').val();
+
+        if (!customer_account) {
+            toastr.warn('Tên đăng nhập không hợp lệ !');
+
+            return false;
+        }
+
+        $.ajax({
+            url: base_url + 'ajax/get_otp_login',
+            data: {customer_account: customer_account},
+            dataType: 'JSON'
+        }).done(function (response) {
+            if (response.status == 0) {
+                toastr.warning(response.msg);
+            } else {
+                toastr.success(response.msg);
+            }
+        }).fail(function (error) {
+            console.log(error);
+        })
+    });
+
+    $(document).on('click', '.get-otp-order', function () {
+        setBusy();
+
+        $.ajax({
+            url: base_url + 'ajax/get_otp_order'
+        }).done(function (response) {
+            response = JSON.parse(response);
+
+            if (response.status == 0) {
+                toastr.warning(response.msg);
+            } else {
+                toastr.success(response.msg);
+            }
+        }).fail(function (error) {
+            console.log(error);
+        }).always(function () {
+            clearBusy();
+        });
+    });
+
+    $(document).on('click', '.btn-submit-order-otp', function () {
+        setBusy();
+        $(this).parents('form').submit();
+    });
+  });
+})(jQuery);
+
+$(document).ready(function () {
+    $('.rating-item__img.owl-carousel').owlCarousel({
+        loop:false,
+        margin: 8,
+        nav: false,
+        dots: true,
+        autoplay: false,
+        autoplayTimeout: 7000,
+        items: 3
+    });
+
+    $('.comment-content').each(function () {
+        if ($(this).text().length < 205) {
+            $(this).css('height', 'auto');
+            $(this).next().hide();
+        }
+    })
+})
+var linkText = 1;
+$(".show-more a").on("click", function() {
+    var $this = $(this);
+    // var linkText = $this.text().toUpperCase();
+
+    if(linkText === 1){
+        linkText = 0;
+        $("div.tab-content").removeClass("hideContent").addClass("showContent");
+        $("img.image-down").removeClass("showImg").addClass("hideImg");
+        $("img.image-up").removeClass("hideImg").addClass("showImg");
+    } else {
+        linkText = 1;
+        $( "div.tab-content" ).removeClass( "showContent" ).addClass( "hideContent" );
+        $("img.image-down").removeClass( "hideImg" ).addClass("showImg");
+        $("img.image-up").removeClass("showImg").addClass("hideImg");
+    };
+
+   // $this.text(linkText);
+});
+
+$(".tab-item").on("click", function() {
+    linkText = 1;
+    $( "div.tab-content" ).removeClass( "showContent" ).addClass( "hideContent" );
+    $("img.image-down").removeClass( "hideImg" ).addClass("showImg");
+    $("img.image-up").removeClass("showImg").addClass("hideImg");
+});
+
+var app = angular.module('myApp', ['ngSanitize'], function($interpolateProvider) {
+  $interpolateProvider.startSymbol('[[');
+  $interpolateProvider.endSymbol(']]');
+});
+
+app.controller('addressCtrl', function($scope) {
+  $scope.address_display_name = '';
+  $scope.address_phone = '';
+  $scope.region_id = '-1';
+  $scope.city_id = '-1';
+  $scope.vnward_id = '-1';
+  $scope.address = '';
+  $scope.address_type = '1';
+  $scope.address_type_checked1 = true;
+  $scope.address_type_checked0 = false;
+  $scope.address_active_checked = false;
+  $scope.address_active = '';
+  $scope.address_id = 0;
+  $scope.list_city = [];
+  $scope.list_ward = [];
+  $scope.title = 'Thêm địa chỉ';
+
+  $scope.save = function () {
+    var city_id = $('#register_city_id').val();
+    var vnward_id = $('#vnward_id').val();
+    $.ajax({
+      type: "post",
+      url: base_url+"customer/address_save",
+      data: {
+        address_id: $scope.address_id,
+        address_display_name: $scope.address_display_name,
+        address_phone: $scope.address_phone,
+        region_id: $scope.region_id,
+        city_id: city_id,
+        vnward_id: vnward_id,
+        address: $scope.address,
+        address_type_home: $scope.address_type_home,
+        address_active: $scope.address_active,
+      },
+      dataType: "Json",
+      beforeSend: function () {
+      },
+      success: function (response) {
+        if(response.status){
+          window.location= base_url+"customer/address_list";
+        }else{
+            for(var i = 0; i < response.errors.length; i++) {
+                toastr.info(response.errors[i]);
+            }
+        }
+      },
+    });
+  }
+
+  $scope.add = function(){
+    $scope.title = 'Thêm địa chỉ';
+    $scope.address_display_name = '';
+    $scope.address_phone = '';
+    $scope.region_id = '-1';
+    $scope.city_id = '-1';
+    $scope.vnward_id = '-1';
+    $scope.address = '';
+    $scope.address_type = '1';
+    $scope.address_type_checked1 = true;
+    $scope.address_type_checked0 = false;
+    $scope.address_active_checked = false;
+    $scope.address_active = '';
+    $scope.address_id = 0;
+    $scope.list_city = [];
+    $scope.list_ward = [];
+  }
+
+  $scope.edit = function (address_id) {
+      $scope.address_type_checked1 = false;
+      $scope.address_type_checked0 = false;
+      $scope.title = 'Sửa địa chỉ';
+      $scope.address_id = address_id;
+      $.ajax({
+          type: "post",
+          url: base_url+"customer/get_address_id",
+          data: {
+            address_id: address_id,
+          },
+          dataType: "Json",
+          success: function (response) {
+              $scope.$apply(function () {
+                  $scope.address_display_name = response.row_address.address_display_name;
+                  $scope.address_phone =  response.row_address.address_phone;
+                  $scope.region_id =  response.row_address.region_id;
+                  $scope.city_id =  response.row_address.city_id;
+                  $scope.vnward_id =  response.row_address.vnward_id;
+                  $scope.address =  response.row_address.address;
+                  $scope.address_type_home = response.row_address.address_type_home;
+                  if(response.row_address.address_type_home == 1){
+                    $scope.address_type_checked1 = true;
+                    $scope.address_type_checked0 = false;
+                  }else{
+                    $scope.address_type_checked1 = false ;
+                    $scope.address_type_checked0 = true;
+                  }
+                  $scope.address_active =  response.row_address.address_active;
+                  if($scope.address_active == 1){
+                    $scope.address_active_checked = true;
+                  }else{
+                    $scope.address_active_checked = false;
+                  }
+                  $scope.list_city = response.list_city;
+                  $scope.list_ward = response.list_ward;
+              });
+          },
+      });
+  }
+
+  $scope.active = function (address_id) {
+      $.ajax({
+          type: "post",
+          url: base_url+"customer/set_address_active",
+          data: {
+            address_id: address_id,
+          },
+          dataType: "Json",
+          success: function (response) {
+              if(response.status){
+                window.location= base_url+"customer/address_list";
+              }else{
+                alert(response.errors);
+              }
+          },
+      });
+  }
+
+});
+
+app.controller('infoPayCtrl', function($scope) {
+
+});
+
+app.controller('orderCtrl', function($scope) {
+
+  $scope.status = '';
+  $scope.page = 0;
+  $scope.pageMax = 0;
+  $scope.pages = [];
+  $scope.list_order = '';
+
+  $scope.list = function(){
+      setBusy();
+      $.ajax({
+          type: "post",
+          url: base_url+"customer/order_lists",
+          data: {
+            status: $scope.status,
+            page : $scope.page,
+          },
+          dataType: "Json",
+          success: function (response) {
+              $scope.$apply(function () {
+                  $scope.list_order = response.data;
+                  $scope.list_order_product = response.list_order_product;
+                  let i = 0;
+                  let j = 0;
+                  var courses = new Array();
+                  while (i  < (response.order_total /10)) {
+                      if (i < 5){
+                          j++;
+                          courses[i]= {id: i , name: j};
+                      }
+                      i++;
+                  }
+                  $scope.pageMax = i-1;
+                  $scope.pages= courses;
+              });
+          }, complete: function () {
+              clearBusy();
+          },
+      });
+  };
+
+  $scope.list();
+
+  $scope.lis_stats = function(status, payment_method){
+      if (status == 20){
+          if(status != 1 && payment_method != 3){
+              return 'Đặt hàng thành công';
+          }else {
+            return 'Đặt hàng thành công';
+          }
+      }else if ( status == 32 || status == 33  || status == 35
+          || status == 36  || status == 37 || status == 41
+          || status == 42 || status == 46 || status == 47){
+        return 'Đơn đang xử lý';
+      }else if(status == 39 || status == 27 ||status == 28 || status == 49){
+        return 'Đã gửi';
+      }else {
+          if (status == 3){
+              return  'Xuống phần mềm';
+          } else if(status == 17){
+              return 'Đã Trả hàng/Hủy COD';
+          } else if(status == 5){
+              return 'Đã Trả hàng/Đổi hàng';
+          }else if(status == 1){
+              return 'Hoàn Thành';
+          }else if(status == 2){
+              return 'Đã hủy đơn hàng';
+          }else if(status == 31){
+              return 'Đơn HT';
+          }else if(status == 43){
+              return 'CH đã gói hàng';
+          }else if(status == 45){
+              return 'Đơn chuẩn bị vk';
+          }else if(status == 48){
+              return 'ON1 xử lý';
+          };
+      }
+  }
+
+  $scope.class_stats = function(status){
+        if (status == 20){
+            return "icon-ic_like"
+        }else if ( status == 32 || status == 33  || status == 35
+            || status == 36  || status == 37 || status == 41
+            || status == 42 || status == 46 || status == 47){
+            return 'icon-ic_cube-1';
+        }else if(status == 39 || status == 27 ||status == 28 || status == 49){
+            return '';
+        }else if(status == 2){
+            return 'icon-ic_reload';
+        }
+    }
+
+  $scope.order_cancel = function (invoice_no) {
+      if (confirm('Bạn chắn chắn muốn huỷ đơn hàng này?')){
+          document.location.href = base_url+'customer/order_cancel/'+invoice_no;
+      }
+      return false;
+  }
+
+  $scope.pages_click = function (n,k=0) {
+
+      if(k == 0){
+          $scope.page = n;
+      }
+
+      if(k == 1){
+          if( $scope.page > 0){
+              $scope.page--;
+          }
+      }
+      if(k == 2){
+          if( $scope.page < $scope.pageMax){
+              $scope.page++;
+          }
+      }
+      $scope.list();
+  }
+});
+
+app.controller('newsCtrl', function($scope) {
+    $scope.magazine_new_top = [];
+    $scope.magazine_new_bottom = [];
+    $scope.new_arrival = [];
+    $scope.dont_miss = [];
+    $scope.story_left = [];
+    $scope.story_right = [];
+
+    $scope.list = function (id) {
+        $.ajax({
+            type: "post",
+            url: base_url+"news/magazine",
+            data: {
+                emagazine_categore_type: id,
+            },
+            dataType: "Json",
+            success: function (response) {
+                $scope.$apply(function () {
+                    $scope.magazine_new_top = response.magazine_new_top;
+                    $scope.magazine_new_bottom = response.magazine_new_bottom;
+                   // $scope.new_arrival = response.new_arrival;
+                    $scope.dont_miss = response.dont_miss;
+                    $scope.story_left = response.story_left;
+                    $scope.story_right = response.story_right;
+                });
+            },
+        });
+    }
+    $scope.list(1);
+});

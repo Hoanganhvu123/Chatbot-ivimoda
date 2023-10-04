@@ -1,0 +1,261 @@
+$(document).ready(function () {
+    $(document).on('click', '.color-picker', function () {
+        setBusy();
+
+        let id = $(this).attr('data-id');
+        let product = $(this).parents('.product');
+        let title = $(product).find('.title-product');
+        let href_thumb = $(product).find('.thumb-product a');
+        let thumb_main = $(product).find('.thumb-product a img').eq(0);
+        let thumb_hover = $(product).find('.thumb-product a img').eq(1);
+        let price = $(product).find('.price-product');
+        let size = $(product).find('.list-size ul');
+        let favourite = $(product).find('.favourite');
+        let ticket = $(product).find('.info-ticket');
+        let badget = $(product).find('.badget');
+        let bag = $(product).find('.add-to-cart');
+        let bag_a = $(product).find('.add-to-cart a');
+        let out_of_stock = $(product).find('.out-of-stock');
+
+        // checked
+        $(this).parent().siblings().removeClass('checked');
+        $(this).parents('ul').find('.view-more-color .sub-color li').removeClass('checked');
+        $(this).parents('.view-more-color').siblings().removeClass('checked');
+        $(this).parent().addClass('checked');
+
+        $.ajax({
+            url: base_url + 'ajax/get-product/' + id,
+            type: 'GET'
+        }).done(function (response) {
+            response = JSON.parse(response);
+            let price_span = '';
+            let size_span = '';
+            let list_size = Object.keys(response.product_group_size);
+            let list_product_sub = Object.keys(response.product_group_sub).map(function (k) {
+                return response.product_group_sub[k];
+            })
+
+            if (response.product_stock_status == 3) {
+                price_span = '<span class="product_stock">Chờ nhập</span>';
+            } else {
+                product.find('.add-to-cart').removeClass('hidden');
+                if (response.coupon_price_sale != '') {
+                    price_span = '<ins><span>' + response.coupon_price_sale + 'đ</span></ins><del style="margin-left: 4px;"><span>' + response.product_price_format + 'đ</span></del>';
+                } else {
+                    price_span = '<ins><span>' + response.product_price_format + 'đ</span></ins>';
+                }
+            }
+
+            for (let i = 0; i < list_size.length; i++) {
+                size_span += '<li'+((list_product_sub[i]['product_sub_quantity'] > 0 && list_product_sub[i]['product_sub_status'] == 1)? ' data-product-sub-id="'+ list_product_sub[i]['product_sub_id']+'"' : ' class="unactive"')+'><button type="button" class="btn btn--large">' + list_size[i] + '</button></li>';
+            }
+
+            title.html('<a href="' + base_url + 'sanpham/' + response.product_slug_extra + '">' + response.product_name + '</a>');
+            price.html(price_span);
+            href_thumb.attr('href', base_url + '/sanpham/' + response.product_slug_extra);
+            thumb_main.attr('src', static_url_product + 'thumab/400/' + response.image_front);
+            thumb_main.attr('alt', response.product_name);
+            thumb_hover.attr('src', static_url_product + 'thumab/400/' + response.image_back);
+            thumb_hover.attr('alt', response.product_name);
+
+            size.html(size_span);
+
+            favourite.attr('data-id', response.product_id);
+            if (typeof logged_in_id != "undefined" && logged_in_id !== '' && response.customer_wishlist.length > 0 && response.customer_wishlist.includes(logged_in_id) == true) {
+                favourite.html('<i class="icon-ic_heart_fill"></i>');
+            } else {
+                favourite.html('<i class="icon-ic_heart"></i>');
+            }
+
+            if (ticket.hasClass('ticket-news'))
+                ticket.removeClass('ticket-news');
+
+            if (ticket.hasClass('seller'))
+                ticket.removeClass('seller');
+
+            if (response.product_new == 1) {
+                ticket.addClass('ticket-news');
+                ticket.html('NEW');
+                ticket.show();
+            } else if (response.product_hot == 1) {
+                ticket.addClass('seller');
+                ticket.html('Best Seller');
+                ticket.show();
+            } else {
+                ticket.empty();
+                ticket.hide();
+            }
+
+            if (response.coupon_display == '') {
+                badget.empty();
+                badget.hide();
+            } else {
+                if (response.coupon_display.indexOf('%')) {
+                    badget.html(response.coupon_display);
+                }
+                badget.removeClass('badget_01 badget_02 badget_03');
+                if (response.coupon_style == 1) {
+                    badget.addClass('badget_01');
+                } else if (response.coupon_style == 2) {
+                    badget.addClass('badget_02');
+                } else if (response.coupon_style == 3) {
+                    badget.addClass('badget_03');
+                }
+            }
+
+            if (response.product_quantity_tmp_total == 0 || !response.product_quantity_tmp_total) {
+                if (!bag_a.hasClass('bag-gray')) {
+                    bag_a.addClass('bag-gray');
+                }
+                // if (bag.length) {
+                //     bag.remove();
+                // }
+                // if (!out_of_stock.length) {
+                //     product.append('<div class="out-of-stock">Hết hàng</div>');
+                // }
+            } else {
+                if (bag_a.hasClass('bag-gray')) {
+                    bag_a.removeClass('bag-gray');
+                }
+                // if (out_of_stock.length) {
+                //     out_of_stock.remove();
+                // }
+                // if (!bag.length) {
+                //     product.append(`<div class="add-to-cart">
+                //     <a href="javascript:void(0)"><i class="icon-ic_shopping-bag"></i></a>
+                // </div>`);
+                // }
+                // if (!$(product).find('.list-size').length) {
+                //     product.append(`<div class="list-size">
+                // </div>`);
+                // }
+            }
+
+            clearBusy();
+        }).fail(function (error) {
+            clearBusy();
+        });
+    });
+
+    let product_price_from = $('input[name=product_price_from]').val() != '' ? $('input[name=product_price_from]').val() : 0;
+    let product_price_to = $('input[name=product_price_to]').val() != '' ? $('input[name=product_price_to]').val() : 10000000;
+
+    $( "#slider-range").slider({
+        range: true,
+        min: 0,
+        max: 10000000,
+        values: [ product_price_from, product_price_to ],
+        slide: function( event, ui ) {
+            $( "#amout-from" ).html(FormatCurrency(ui.values[0]) +'đ');
+            $( "#amout-to" ).html(FormatCurrency(ui.values[1]) + 'đ');
+
+            $('input[name=product_price_from]').val(ui.values[0]);
+            $('input[name=product_price_to]').val(ui.values[1]);
+        }
+    });
+    $( "#slider-range-mb").slider({
+        range: true,
+        min: 0,
+        max: 10000000,
+        values: [ product_price_from, product_price_to ],
+        slide: function( event, ui ) {
+            $( "#amout-from-mb" ).html(FormatCurrency(ui.values[0]) +'đ');
+            $( "#amout-to-mb" ).html(FormatCurrency(ui.values[1]) + 'đ');
+
+            $('input[name=product_price_from]').val(ui.values[0]);
+            $('input[name=product_price_to]').val(ui.values[1]);
+        }
+    });
+
+    // check list color and show more
+    $('.list-color ul').each(function () {
+       let max_width = $(this).parent().width() - $(this).next().width();
+       let width = $(this).width();
+
+       if (width > max_width) {
+           let total_li = $(this).children('li').length;
+           let child_width = $(this).children('li').width();
+           let total_li_show = 0;
+           let color_view_more = '<ul>';
+           if (child_width == 15) {
+               total_li_show = Math.round(max_width / (child_width + 10) - 1); // margin right 10px, -1 color to show button view more
+           } else {
+               total_li_show = Math.round(max_width / (child_width + 10) - 2); // margin right 10px, -2 color to show button view more
+           }
+
+           $(this).children('li').hide();
+           for (let i = 0; i < total_li_show; i++) {
+               $(this).children('li').eq(i).show();
+           }
+           let li_hide = $(this).children('li').filter(function () {
+               return $(this).css('display') == 'none';
+           });
+           for (let j = 0; j < total_li-total_li_show; j++) {
+               if (li_hide[j].className == 'checked') {
+                   color_view_more += '<li class="checked">' + li_hide[j].innerHTML + '</li>';
+               } else {
+                   color_view_more += '<li>' + li_hide[j].innerHTML + '</li>';
+               }
+           }
+           color_view_more += '</ul>';
+           $(this).append('<li class="view-more-color"><a href="javascript:void(0)">+'+(total_li-total_li_show)+'</a><div class="sub-color">'+color_view_more+'</div></li>');
+       }
+    });
+});
+
+$(document).on('click', '.favourite, .btn--wishlist', function () {
+    setBusy();
+    if (typeof logged_in_id == "undefined" || logged_in_id.length == 0) {
+        toastr.info('Bạn cần đăng nhập để thực hiện chức năng này !');
+        clearBusy();
+        return;
+    }
+
+   let product_id = $(this).attr('data-id');
+   let status = 0;
+   let data = {};
+
+   if ($(this).find('i').hasClass('icon-ic_heart')) {
+       status = 1;
+       $('.favourite[data-id='+product_id+']').html('<i class="icon-ic_heart_fill"></i>');
+       $('.btn--wishlist').html('<i class="icon-ic_heart_fill"></i>');
+   } else {
+       status = 0;
+       $('.favourite[data-id='+product_id+']').html('<i class="icon-ic_heart"></i>');
+       $('.btn--wishlist').html('<i class="icon-ic_heart"></i>');
+   }
+
+   data.product_id = product_id;
+   data.customer_id = logged_in_id;
+   data.status = status;
+
+   $.ajax({
+       url: base_url + 'ajax/product-wishlist',
+       data: data,
+       type: 'GET'
+   }).done(function (response) {
+       clearBusy();
+   }).fail(function (error) {
+       clearBusy();
+       console.log(error);
+   })
+});
+
+$(document).on('click', '#box-comment .list-inline-pagination li a', function (e) {
+    e.preventDefault();
+    $(this).parents('.list-inline-pagination').find('li').attr('id', '');
+    $(this).parent().attr('id', 'products_active_ts');
+
+    let str_url = $(this).attr('href');
+
+    if (str_url != '#') {
+        let split_url = str_url.split('san-pham/');
+        let product_key = split_url[1].split('/')[0];
+        let current_page = split_url[1].split('/')[1];
+
+        if (typeof product_key != "undefined" && typeof current_page != "undefined") {
+            setBusy();
+            showComment(product_key, current_page);
+        }
+    }
+})

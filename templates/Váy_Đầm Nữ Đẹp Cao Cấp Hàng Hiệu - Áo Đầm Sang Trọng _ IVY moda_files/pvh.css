@@ -1,0 +1,33 @@
+.news-detail-section .news__title h1 {
+    font-size: 26px;
+    color: #000;
+}
+
+.news__content {
+    margin-top: 0px;
+}
+
+.news__content p {
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.news-detail-section .news__title .time {
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.news__content h2, .news__content h3, .news__content h4, .news__content h5{
+    color: #000;
+    padding-bottom: 5px;
+}
+
+.news__content img {
+    width: auto !important;
+    height: auto !important;
+}
+
+.content-news img{
+    margin-bottom: 10px !important;
+}
+
